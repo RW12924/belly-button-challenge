@@ -38,7 +38,7 @@ function buildCharts(sample) {
     var sampleValues = filteredSamples.sample_values;
 
     // Build a Bubble Chart
-    var trace1 = {
+    var bubbleTrace = {
       'x': otuIds,
       'y': sampleValues,
       'text': otuLabels,
@@ -49,23 +49,23 @@ function buildCharts(sample) {
       }
     };
 
-    var data1 = [trace1];
+    var bubbleData = [bubbleTrace];
 
-    var layout1 = {
+    var bubbleLayout = {
       'title': 'Bacteria Cultures Per Sample',
       'xaxis': {'title': 'OTU ID'},
       'yaxis': {'title': 'Number of Bacteria'}
     };
 
     // Render the Bubble Chart
-    Plotly.newPlot('bubble', data1, layout1);
+    Plotly.newPlot('bubble', bubbleData, bubbleLayout);
 
     // For the Bar Chart, map the otu_ids to a list of strings for your yticks
     var yticks = otuIds.slice(0, 10).map(id => `OTU ${id}`).reverse();
 
     // Build a Bar Chart
     // Don't forget to slice and reverse the input data appropriately
-    var trace2 = {
+    var barTrace = {
       'x': sampleValues.slice(0, 10).reverse(),
       'y': yticks,
       'type': 'bar',
@@ -73,16 +73,16 @@ function buildCharts(sample) {
       'text': otuLabels.slice(0, 10).reverse()
     };
 
-    var data2 = [trace2];
+    var barData = [barTrace];
 
-    var layout2 = {
+    var barLayout = {
       'title': 'Top 10 Bacteria Cultures Found',
       'xaxis': { title: 'Number of Bacteria' },
       'yaxis': { tickvals: yticks, ticktext: yticks }
     };
 
     // Render the Bar Chart
-    Plotly.newPlot('bar', data2, layout2);
+    Plotly.newPlot('bar', barData, barLayout);
 
   });
 }
